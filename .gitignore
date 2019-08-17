@@ -2,10 +2,12 @@
 *.retry
 secrets.yml
 tests/roles/
-
+# Python
+__pycache__
 ## Terraform ##
 *.tfvars
 # Compiled files
 *.tfstate*
 # Module directory
 .terraform/
+

@@ -21,6 +21,27 @@ jobs:
       - run:
           name: Run Ansible playbook
           command: make test_ci
+
+  ansible_test:
+    docker:
+      - image: circleci/python:3.6
+    environment:
+      PIPENV_VENV_IN_PROJECT: 1
+    working_dir: ~/jenkins-deploy
+    steps:
+      - checkout
+      - setup_remote_docker
+      - restore_cache:
+          keys:
+            - v1-pipenv-{{ checksum "Pipfile.lock" }}
+            - v1-pipenv-
+      - run: pipenv sync --dev
+      - save_cache:
+          key: v1-pipenv-{{ checksum "Pipfile.lock" }}
+          paths:
+            - .venv
+      - run: pipenv run test
+
   validate_terraform:
     working_directory: /etc/jenkins-deploy
     docker:
@@ -36,9 +57,12 @@ jobs:
       - run:
           name: Check Terraform syntax
           command: make validate_terraform
+
+
 workflows:
   version: 2
   build_and_test:
     jobs:
+      - ansible_test
       - build
       - validate_terraform

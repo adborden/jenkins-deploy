@@ -1,0 +1,4 @@
+---
+- src: geerlingguy.jenkins
+- src: gsa.https-proxy
+- src: srsp.oracle-java
