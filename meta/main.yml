@@ -46,6 +46,9 @@ dependencies:
 
   - role: srsp.oracle-java
     java_remove_download: false
+    # Work-around https://github.com/srsp/ansible-oracle-java/issues/29
+    jdk_file_url: https://download.oracle.com/otn-pub/java/jdk/12.0.2+10/e482c34c86bd4bf8b56c0b35558996b9/jdk-12.0.2_linux-x64_bin
+    java_subversion: "0.2"
 
   - src: geerlingguy.jenkins
     # use srsp.oracle-java instead
