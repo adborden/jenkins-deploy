@@ -1,0 +1,10 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Ensure OS packages are installed
+      apt: name={{ packages }} update_cache=yes cache_valid_time={{ 24 * 60 * 60 }} state=present
+      vars:
+        packages:
+          - unzip
+      when: ansible_distribution == "Ubuntu"
