@@ -12,6 +12,8 @@ lint:
 platforms:
   - name: centos
     image: centos:7
+    volume_mounts:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
 #  - name: xenial
 #    image: ubuntu:xenial
 #  - name: bionic
